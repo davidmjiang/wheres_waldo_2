@@ -22,8 +22,17 @@ APP.ajax = (function() {
     });
   }
 
+  var getAllTags = function(){
+    $.ajax({
+      url: '/tags',
+      type: "GET",
+      dataType: "script"
+    });
+  }
+
   return {
-    makeTag: makeTag
+    makeTag: makeTag,
+    getAllTags: getAllTags
   }
 
 })();

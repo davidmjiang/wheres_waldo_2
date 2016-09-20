@@ -20,6 +20,7 @@ APP.waldo = (function() {
     setClickListeners();
     setHoverListeners();
     setListListener();
+    APP.ajax.getAllTags();
   }
 
   var setClickListeners = function() {
