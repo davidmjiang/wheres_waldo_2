@@ -1,11 +1,11 @@
-$(document).ready(function(){
+$(document).ready(function() {
   APP.waldo.init();
 })
 
 var APP = APP || {}
 
 
-APP.waldo = (function(){
+APP.waldo = (function() {
 
   function Tag(x, y) {
     this.x = x;
@@ -14,20 +14,33 @@ APP.waldo = (function(){
 
   var CHARACTERS = ["Waldo", "Wenda", "Odlaw", "Wizard Whitebeard", "Woof"];
 
-  var WIDTH = '25';
+  var WIDTH = '100';
 
   var init = function() {
     setClickListeners();
     setHoverListeners();
+    setListListener();
   }
 
   var setClickListeners = function() {
     $('img').on("click", onClick);
   }
 
-  var setHoverListeners = function(){
+  var setListListener = function() {
+    $("#image-container").on("click", ".tag li", listClick)
+  }
+
+  var setHoverListeners = function() {
     $('#image-container').mouseover(showTags);
     $('#image-container').mouseout(hideTags);
+  }
+
+  var listClick = function(event) {
+    console.log(event.target)
+    var $li = $(event.target);
+    var name = $li.text()
+    $li.siblings().remove();
+    $li.parent().parent().parent().removeClass("active");
   }
 
   var onClick = function(event) {
@@ -37,27 +50,31 @@ APP.waldo = (function(){
     placeTag(t);
   }
 
-  var showTags = function(){
+  var showTags = function() {
     $(".tag").show();
   }
 
-  var hideTags = function(){
+  var hideTags = function() {
     $(".tag").hide();
   }
 
   var placeTag = function(tag) {
     var $tagDisplay = $('<div>')
-      .addClass("tag")
-      .css({left: tag.x - WIDTH/2, top: tag.y - WIDTH/2})
+      .addClass("tag active")
+      .css({
+        left: tag.x - WIDTH / 2,
+        top: tag.y - WIDTH / 2
+      })
     $("#image-container").append($tagDisplay);
     var dropdown = buildDropdown();
     $tagDisplay.append(dropdown);
   }
 
-  var buildDropdown = function(){
+
+  var buildDropdown = function() {
     var $dropDown = $('<div>').css("background-color", "white");
     var $list = $("<ul>");
-    CHARACTERS.forEach(function(character){
+    CHARACTERS.forEach(function(character) {
       var $listItem = $("<li>").text(character);
       $list.append($listItem);
     })
@@ -72,5 +89,3 @@ APP.waldo = (function(){
 
 
 })();
-
-
