@@ -32,7 +32,7 @@ APP.waldo = (function() {
 
   var setClickListeners = function() {
     $('img').on("click", onClick);
-    $('.delete-tag').on("click", onDelete);
+    $('#image-container').on("click", ".delete-tag", onDelete);
   }
 
   var setListListener = function() {
@@ -53,7 +53,7 @@ APP.waldo = (function() {
   }
 
   var onDelete = function(event){
-    var name = $(event.target).parent().text();
+    var name = $(event.target).parent().parent().attr("id");
     for(var i = 0; i < chosenCharacters.length; i++){
       if(chosenCharacters[i] === name){
         chosenCharacters.splice(i,1);
@@ -63,6 +63,7 @@ APP.waldo = (function() {
   }
 
   var onClick = function(event) {
+    $(".active").remove();
     var x = event.pageX;
     var y = event.pageY;
     t = new Placer(x, y)
