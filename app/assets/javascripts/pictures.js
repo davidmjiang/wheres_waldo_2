@@ -7,7 +7,7 @@ var APP = APP || {}
 
 APP.waldo = (function() {
 
-  function Tag(x, y) {
+  function Placer(x, y) {
     this.x = x;
     this.y = y;
   }
@@ -38,17 +38,16 @@ APP.waldo = (function() {
   var listClick = function(event) {
     var $li = $(event.target);
     var name = $li.text()
-    var $tag = $li.parentsUntil(".active");
-    APP.ajax.makeTag(name, $tag.attr("data-id");
-    $li.siblings().remove();
-    $tag.removeClass("active");
+    var $tag = $li.parent().parent().parent();    APP.ajax.makeTag(name, $tag.attr("data-id"));
+    $tag.remove();
   }
 
   var onClick = function(event) {
     var x = event.pageX;
     var y = event.pageY;
-    t = new Tag(x, y)
-    placeTag(t);
+    t = new Placer(x, y)
+    $tagDisplay = placeTag(t);
+    $tagDisplay.append(buildDropdown());
   }
 
   var showTags = function() {
@@ -66,12 +65,11 @@ APP.waldo = (function() {
         left: tag.x - WIDTH / 2,
         top: tag.y - WIDTH / 2
       })
-      .attr("data-id", tag.x+"-"+tag.y);
+      .attr("data-id", tag.x + "-" + tag.y);
     $("#image-container").append($tagDisplay);
-    var dropdown = buildDropdown();
-    $tagDisplay.append(dropdown);
+    return $tagDisplay
   }
-
+  
 
   var buildDropdown = function() {
     var $dropDown = $('<div>').css("background-color", "white");
@@ -86,6 +84,7 @@ APP.waldo = (function() {
 
   return {
     init: init,
+    placeTag: placeTag,
 
   }
 

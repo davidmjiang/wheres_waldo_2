@@ -1,0 +1,11 @@
+
+
+  // making the tag
+
+  var x = <%= @tag.x %>;
+  var y = <%= @tag.y %>;
+  var tag = {x: x, y: y};
+
+  var $tag = APP.waldo.placeTag(tag)
+  console.log($tag)
+  $tag.html("<%= @tag.name %>")
