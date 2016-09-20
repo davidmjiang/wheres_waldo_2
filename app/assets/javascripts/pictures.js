@@ -36,11 +36,12 @@ APP.waldo = (function() {
   }
 
   var listClick = function(event) {
-    console.log(event.target)
     var $li = $(event.target);
     var name = $li.text()
+    var $tag = $li.parentsUntil(".active");
+    APP.ajax.makeTag(name, $tag.attr("data-id");
     $li.siblings().remove();
-    $li.parent().parent().parent().removeClass("active");
+    $tag.removeClass("active");
   }
 
   var onClick = function(event) {
@@ -65,6 +66,7 @@ APP.waldo = (function() {
         left: tag.x - WIDTH / 2,
         top: tag.y - WIDTH / 2
       })
+      .attr("data-id", tag.x+"-"+tag.y);
     $("#image-container").append($tagDisplay);
     var dropdown = buildDropdown();
     $tagDisplay.append(dropdown);
