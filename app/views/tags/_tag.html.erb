@@ -1,3 +1,6 @@
 <div class="tag active" data-id="<%=tag.x%>-<%=tag.y%>" style="left: <%=tag.x-50%>px; top: <%=tag.y-50%>px">
-  <%= tag.name %>
+    <div class="delete-tag">
+        <%= link_to "X", tag_path(tag), remote: true, method: :delete %>
+    </div>
+    <%= tag.name %>
 </div>

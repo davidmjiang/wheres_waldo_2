@@ -19,7 +19,21 @@ class TagsController < ApplicationController
         format.js{head :none}
       end
     end
+  end
 
+  def destroy
+    @tag = Tag.find(params[:id])
+    if @tag.destroy
+      respond_to do |format|
+        format.html{redirect_to root}
+        format.js
+      end
+    else
+      respond_to do |format|
+        format.html{render root}
+        format.js{head :none}
+      end
+    end
   end
 
   private

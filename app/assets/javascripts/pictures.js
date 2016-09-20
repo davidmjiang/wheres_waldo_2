@@ -14,6 +14,8 @@ APP.waldo = (function() {
 
   var CHARACTERS = ["Waldo", "Wenda", "Odlaw", "Wizard Whitebeard", "Woof"];
 
+  var chosenCharacters = [];
+
   var WIDTH = '100';
 
   var init = function() {
@@ -70,12 +72,12 @@ APP.waldo = (function() {
     $("#image-container").append($tagDisplay);
     return $tagDisplay
   }
-  
+
 
   var buildDropdown = function() {
     var $dropDown = $('<div>').css("background-color", "white");
     var $list = $("<ul>");
-    CHARACTERS.forEach(function(character) {
+    characters.forEach(function(character) {
       var $listItem = $("<li>").text(character);
       $list.append($listItem);
     })
