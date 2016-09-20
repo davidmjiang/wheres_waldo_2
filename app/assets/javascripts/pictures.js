@@ -1,5 +1,6 @@
 $(document).ready(function() {
   APP.waldo.init();
+  APP.game.init();
 })
 
 var APP = APP || {}
@@ -18,6 +19,10 @@ APP.waldo = (function() {
 
   var WIDTH = '100';
 
+  var getChosenCharacters = function(){
+    return chosenCharacters;
+  }
+
   var init = function() {
     setClickListeners();
     setHoverListeners();
@@ -27,6 +32,7 @@ APP.waldo = (function() {
 
   var setClickListeners = function() {
     $('img').on("click", onClick);
+    $('.delete-tag').on("click", onDelete);
   }
 
   var setListListener = function() {
@@ -40,9 +46,20 @@ APP.waldo = (function() {
 
   var listClick = function(event) {
     var $li = $(event.target);
-    var name = $li.text()
+    var name = $li.text();
+    chosenCharacters.push(name);
     var $tag = $li.parent().parent().parent();    APP.ajax.makeTag(name, $tag.attr("data-id"));
     $tag.remove();
+  }
+
+  var onDelete = function(event){
+    var name = $(event.target).parent().text();
+    for(var i = 0; i < chosenCharacters.length; i++){
+      if(chosenCharacters[i] === name){
+        chosenCharacters.splice(i,1);
+        break;
+      }
+    }
   }
 
   var onClick = function(event) {
@@ -77,9 +94,11 @@ APP.waldo = (function() {
   var buildDropdown = function() {
     var $dropDown = $('<div>').css("background-color", "white");
     var $list = $("<ul>");
-    characters.forEach(function(character) {
-      var $listItem = $("<li>").text(character);
-      $list.append($listItem);
+    CHARACTERS.forEach(function(character) {
+      if($.inArray(character, chosenCharacters) < 0){
+        var $listItem = $("<li>").text(character);
+        $list.append($listItem);
+      }
     })
     $dropDown.append($list);
     return $dropDown;
@@ -88,7 +107,7 @@ APP.waldo = (function() {
   return {
     init: init,
     placeTag: placeTag,
-
+    getChosenCharacters: getChosenCharacters
   }
 
 
