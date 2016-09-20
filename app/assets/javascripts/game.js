@@ -3,11 +3,9 @@ var APP = APP || {}
 
 APP.game = (function() {
 
-  var clock;
   var score;
 
   var init = function() {
-    clock = new Date().getTime();
     score = 1000;
     start();
   }
@@ -22,8 +20,7 @@ APP.game = (function() {
   }
 
   var updateScore = function() {
-    var timeDiff = new Date().getTime() - clock;
-    score = 1000 - timeDiff/1000;
+    score -= 1;
     $("#score").text("Your score: " + Math.floor(score));
   }
 
@@ -43,6 +40,17 @@ APP.game = (function() {
     return $("#image-container").attr("data-id")
   }
 
+  var checkAccuracy = function(name, coords){
+    name = name.replace(/\s/, '-');
+   if($('meta[name=' + name + ']').length){
+      var c = coords.split("-");
+      var realX = $('meta[name=' + name + ']').attr("x");
+      var realY = $('meta[name=' + name + ']').attr("y");
+      var distance = Math.sqrt(Math.pow((realX - c[0]),2) + Math.pow((realY - c[1]),2))
+      score += (1000/distance);
+    }
+  }
+
   var getHighScore = function() {
     var highScore = $('meta[class="score"]').last().attr("score")
     return parseInt(highScore);
@@ -50,7 +58,8 @@ APP.game = (function() {
 
 
   return {
-    init: init
+    init: init,
+    checkAccuracy: checkAccuracy
   }
 
 })()

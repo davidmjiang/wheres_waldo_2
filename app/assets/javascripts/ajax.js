@@ -26,10 +26,10 @@ APP.ajax = (function() {
     $.ajax({
       url: '/tags',
       type: "GET",
-      dataType: "script"
+      dataType: "script",
+      success: function(){APP.waldo.clearTags();}
     });
   }
-
 
   var makeScore = function(name, score, pictureId) {
     $.ajax({

@@ -2,6 +2,9 @@
 <% @scores.each do |score| %>
 <%= tag :meta, class:"score", score: score.points, name: score.name %>
 <% end %>
+<% @characters.each do |char| %>
+<%= tag :meta, class:"character", name: char.name, x: char.x, y: char.y %>
+<% end %>
 <% end %>
 
 <div id="score"></div>

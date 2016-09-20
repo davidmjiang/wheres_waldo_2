@@ -4,4 +4,27 @@
 <div class="preview">
   <%= link_to image_tag(p.file_name), p %>
 </div>
+<div id="highscore-list">
+    <table>
+      <caption>High Scores</caption>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Score
+            </th>
+        </tr>
+        <% p.getHighScore.each do |score| %>
+        <tr>
+            <td>
+                <%= score.name %>
+            </td>
+            <td>
+                <%= score.points %>
+            </td>
+        </tr>
+        <% end %>
+    </table>
+</div>
 <% end %>

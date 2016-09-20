@@ -28,6 +28,7 @@ APP.waldo = (function() {
     setHoverListeners();
     setListListener();
     APP.ajax.getAllTags();
+    //clearTags();
   }
 
   var setClickListeners = function() {
@@ -49,6 +50,7 @@ APP.waldo = (function() {
     var name = $li.text();
     chosenCharacters.push(name);
     var $tag = $li.parent().parent().parent();    APP.ajax.makeTag(name, $tag.attr("data-id"));
+    APP.game.checkAccuracy(name, $tag.attr("data-id"))
     $tag.remove();
   }
 
@@ -105,10 +107,15 @@ APP.waldo = (function() {
     return $dropDown;
   }
 
+  var clearTags = function(){
+    $(".delete-tag a").trigger("click");
+  }
+
   return {
     init: init,
     placeTag: placeTag,
-    getChosenCharacters: getChosenCharacters
+    getChosenCharacters: getChosenCharacters,
+    clearTags: clearTags
   }
 
 
