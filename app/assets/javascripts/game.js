@@ -33,6 +33,19 @@ APP.game = (function() {
 
   var gameOver = function(gameLoop) {
     clearInterval(gameLoop);
+    if (score > getHighScore()){
+      var name = prompt("New High Score! Please enter your name:")
+      APP.ajax.makeScore(name, score, getPictureId());
+    }
+  }
+
+  var getPictureId = function() {
+    return $("#image-container").attr("data-id")
+  }
+
+  var getHighScore = function() {
+    var highScore = $('meta[class="score"]').last().attr("score")
+    return parseInt(highScore);
   }
 
 

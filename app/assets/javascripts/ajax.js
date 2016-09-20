@@ -22,7 +22,7 @@ APP.ajax = (function() {
     });
   }
 
-  var getAllTags = function(){
+  var getAllTags = function() {
     $.ajax({
       url: '/tags',
       type: "GET",
@@ -30,9 +30,27 @@ APP.ajax = (function() {
     });
   }
 
+
+  var makeScore = function(name, score, pictureId) {
+    $.ajax({
+      url: pictureId + '/scores',
+      type: "POST",
+      data: {
+        score: {
+          name: name,
+          points: score
+        }
+      },
+      dataType: "script"
+    });
+  }
+
+
+
   return {
     makeTag: makeTag,
-    getAllTags: getAllTags
+    getAllTags: getAllTags,
+    makeScore: makeScore
   }
 
 })();
