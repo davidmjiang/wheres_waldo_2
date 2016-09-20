@@ -31,3 +31,13 @@ img{
 ul {
   list-style: none;
 }
+
+#score{
+  position: fixed;
+  z-index: 10;
+  background-color: white;
+}
+
+.preview img{
+  width: 40%;
+}

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'pictures#show'
+  root 'pictures#index'
 
   resources :pictures, only: [:index, :show]
   resources :tags, only: [:index, :create, :destroy]

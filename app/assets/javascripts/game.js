@@ -23,7 +23,7 @@ APP.game = (function() {
 
   var updateScore = function() {
     var timeDiff = new Date().getTime() - clock;
-    score -= timeDiff/1000
+    score = 1000 - timeDiff/1000;
     $("#score").text("Your score: " + Math.floor(score));
   }
 

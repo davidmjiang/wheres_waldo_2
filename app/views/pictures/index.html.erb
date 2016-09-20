@@ -1,1 +1,7 @@
-<%= image_tag('ww_giant_image.jpg') %>
+<h1>Choose a picture:</h1>
+
+<% @pictures.each do |p| %>
+<div class="preview">
+  <%= link_to image_tag(p.file_name), p %>
+</div>
+<% end %>

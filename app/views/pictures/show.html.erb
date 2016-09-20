@@ -1,4 +1,4 @@
 <div id="score"></div>
-<div id="image-container">
-  <%= image_tag('ww_giant_image.jpg') %>
+<div id="image-container" data-id="<%= @picture.id %>">
+  <%= image_tag(@picture.file_name) %>
 </div>
